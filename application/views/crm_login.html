@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言管理-登录</title>
+    <base href="<?php echo base_url()?>">
+    <link href="css/admin/bootstrap.css" rel="stylesheet">
+    <link href="css/admin/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/admin/login.css" rel="stylesheet">
+
+</head>
+<body style="text-align: center;">
+    <div style="margin: 0 auto;margin-top: 10%;">
+        <form action="<?php echo base_url()?>/wechat_crm/check_login" method="post">
+            <div>
+                <input type="text" name="account" placeholder="账号">
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="密码">
+            </div>
+            <div>
+                <input type="submit" value="登录">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

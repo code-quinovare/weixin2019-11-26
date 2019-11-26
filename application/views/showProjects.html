@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>产品注册</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.scs.min.js"></script>
+    <script src="js/CNAddrArr.min.js"></script>
+    <link href="css/scs.min.css" rel="stylesheet" />
+    <style>
+        p{float:left;padding:3% 0 2.2% 2.2%;text-align:left;}
+        input[type=text]{padding:3.5% 8% 2.4% 3%;}
+        input[type=password]{padding:3% 8% 2.4% 3%;}
+        .span_hidden{display:none;}
+        #popDiv,#popDiv1{background:#595959;width: 80%;top: 20%;}
+        .btn-bd{margin-top: 10%;}
+        .bottom a{display: inline-block;margin-top: 3%;}
+        .forgetPw{margin-left: 3%;}
+        .register{float: right;margin-right: 3%;color: rgb(11, 142, 241);}
+        .image{
+            margin:0 auto;
+            width:auto;
+            text-align:center;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div class="middle">
+        <ul data-toggle="distpicker">
+            <li style="vertical-align:middle;"><p style="width: 25%;">产品类型</p> <p>QS-P无针注射器</p></li>
+            <li class="li_last"><p style="width: 25%;">产品注册码</p><input type="text" class="project_num" maxlength=16  name="project_num" placeholder="请输入16位纯数字" onfocus='span_hidden()' /><br></li>
+            <span id="span_project_num" class='span_hidden'><font color='red' size='1'>产品编号输入有误！</font></span>
+            <li class="li_last"><p style="width: 25%;">姓名</p><input type="text"  class="ename" maxlength=16  name="ename" placeholder="请输入姓名" onfocus='span_hidden()' /><br></li>
+            <span id="idename" class='span_hidden'><font color='red' size='1'>请输入姓名！</font></span>
+            <li class="li_last"><p style="width: 25%;">电话</p><input type="text"  class="ephone" maxlength=11  name="ephone" placeholder="请输入电话" onfocus='span_hidden()' /></li>
+            <span id="idephone" class='span_hidden'><font color='red' size='1'>请输入正确的手机号！</font></span>
+            <li class="li_last"><p style="width: 25%;">省市区</p>
+                <input type="text" readonly placeholder="请选择省市区" id="myAddrs" name="addr" data-key="1-36-37" onfocus='span_hidden()'/>
+            </li>
+            <span id="dizhi" class='span_hidden'><font color='red' size='1'>请选择省市区！</font></span>
+            <script>
+                $(function() {
+                    /**
+                     * 通过数组id获取地址列表数组
+                     * @param {Number} id
+                     * @return {Array}
+                     */
+                    function getAddrsArrayById(id) {
+                        var results = [];
+                        if (addr_arr[id] != undefined)
+                            addr_arr[id].forEach(function(subArr) {
+                                results.push({
+                                    key: subArr[0],
+                                    val: subArr[1]
+                                });
+                            });
+                        else {
+                            return;
+                        }
+                        return results;
+                    }
+                    /**
+                     * 通过开始的key获取开始时应该选中开始数组中哪个元素
+                     *
+                     * @param {Array} StartArr
+                     * @param {Number|String} key
+                     * @return {Number}
+                     */
+                    function getStartIndexByKeyFromStartArr(startArr, key) {
+                        var result = 0;
+                        if (startArr != undefined)
+                            startArr.forEach(function(obj, index) {
+                                if (obj.key == key) {
+                                    result = index;
+                                    return false;
+                                }
+                            });
+                        return result;
+                    }
+                    $("#myAddrs").click(function() {
+                        var PROVINCES = [],
+                            startCities = [],
+                            startDists = [];
+                        //Province data，shall never change.
+                        addr_arr[0].forEach(function(prov) {
+                            PROVINCES.push({
+                                key: prov[0],
+                                val: prov[1]
+                            });
+                        });
+                        //init other data.
+                        var $input = $(this),
+                            dataKey = $input.attr("data-key"),
+                            provKey = 1, //default province 北京
+                            cityKey = 36, //default city 北京
+                            distKey = 37, //default district 北京东城区
+                            distStartIndex = 0, //default 0
+                            cityStartIndex = 0, //default 0
+                            provStartIndex = 0; //default 0
+
+                        if (dataKey != "" && dataKey != undefined) {
+                            var sArr = dataKey.split("-");
+                            if (sArr.length == 3) {
+                                provKey = sArr[0];
+                                cityKey = sArr[1];
+                                distKey = sArr[2];
+
+                            } else if (sArr.length == 2) { //such as 台湾，香港 and the like.
+                                provKey = sArr[0];
+                                cityKey = sArr[1];
+                            }
+                            startCities = getAddrsArrayById(provKey);
+                            startDists = getAddrsArrayById(cityKey);
+                            provStartIndex = getStartIndexByKeyFromStartArr(PROVINCES, provKey);
+                            cityStartIndex = getStartIndexByKeyFromStartArr(startCities, cityKey);
+                            distStartIndex = getStartIndexByKeyFromStartArr(startDists, distKey);
+                        }
+                        var navArr = [{//3 scrollers, and the title and id will be as follows:
+                            title: "省",
+                            id: "scs_items_prov"
+                        }, {
+                            title: "市",
+                            id: "scs_items_city"
+                        }, {
+                            title: "区",
+                            id: "scs_items_dist"
+                        }];
+                        SCS.init({
+                            navArr: navArr,
+                            onOk: function(selectedKey, selectedValue) {
+                                $input.val(selectedValue).attr("data-key", selectedKey);
+                            }
+                        });
+                        var distScroller = new SCS.scrollCascadeSelect({
+                            el: "#" + navArr[2].id,
+                            dataArr: startDists,
+                            startIndex: distStartIndex
+                        });
+                        var cityScroller = new SCS.scrollCascadeSelect({
+                            el: "#" + navArr[1].id,
+                            dataArr: startCities,
+                            startIndex: cityStartIndex,
+                            onChange: function(selectedItem, selectedIndex) {
+                                distScroller.render(getAddrsArrayById(selectedItem.key), 0); //re-render distScroller when cityScroller change
+                            }
+                        });
+                        var provScroller = new SCS.scrollCascadeSelect({
+                            el: "#" + navArr[0].id,
+                            dataArr: PROVINCES,
+                            startIndex: provStartIndex,
+                            onChange: function(selectedItem, selectedIndex) { //re-render both cityScroller and distScroller when provScroller change
+                                cityScroller.render(getAddrsArrayById(selectedItem.key), 0);
+                                distScroller.render(getAddrsArrayById(cityScroller.getSelectedItem().key), 0);
+                            }
+                        });
+                    });
+                });
+            </script>
+            <li class="li_last"><p style="width: 25%;">详细地址</p><input type="text"  class="eaddress" name="eaddress" placeholder="选填" onfocus='span_hidden()' /><br></li>
+           <!-- <li style="background-color: #f0f0f0;"><p style="font-size:13px;"><font color="red">*</font>提交后快舒尔客服将通过电话010-50960187与您联系并提供使用指导，请留意接听！</p></li>-->
+            <li class="li_last"><p style="width: 25%;">验证码</p><input type="text"  style="width: 45%;" id="verify" name="verify" maxlength="4"  autocomplete="off"  onkeyup="this.value=this.value.replace(/^ +| +$/g,'')" /><a href="javascript:reloadCode();">
+                <img src="<?php echo base_url('captcha_code/verify_image');?>" name="checkCodeImg" id="checkCodeImg" border="0" /></a><br></li>
+             <li style="background-color: #f0f0f0;"><p style="font-size:13px;"><font color="red">*</font>提交后快舒尔客服将通过电话010-50960187与您联系并提供使用指导，请留意接听！</p></li>
+        </ul>
+    </div>
+    <div class="bottom">
+        <span class="tip"></span>
+        <input type="button" value="提交" class="btn-bd">
+    </div>
+</div>
+<div class="image" style="margin-top: 20%;">
+    <img style="width: 320px;height: auto;" src="img/images/newinfo.png" />
+</div>
+<div id="bg" class="bg" style="display:none;"></div>
+<br />
+</body>
+</html>
+<script>
+    $(function(){
+        reloadCode();
+        loading();
+        $(".project_type").click(function(){
+            showdiv1();
+            $(".selected").show();
+        });
+        $(".priject_type_sele span").click(function(){
+            bingli();
+            $(this).addClass("choose");
+            $(".project_type").val($(this).text());
+        });
+    });
+    function bingli(){
+        $(".priject_type_sele span").each(function() {
+            if ($(this).hasClass("choose")) {
+                $(this).removeClass("choose");
+            }
+            closediv();
+        });
+    }
+    function showdiv1(){
+        document.getElementById('popDiv1').style.display='block';
+        document.getElementById('bg').style.display='block';
+    }
+    function closediv(){
+        document.getElementById('bg').style.display='none';
+        document.getElementById('popDiv1').style.display='none';
+    }
+
+    function reloadCode(){
+        var dom = document.getElementById("checkCodeImg");
+        dom.src = "<?php echo base_url('captcha_code/verify_image?str=');?>" + Math.random();
+    }
+    $(".btn-bd").click(function(){
+        loading();
+        var project_type='QS-P无针注射器';
+        //var project_type= obj.options[index].value;
+        var project_num=$(".project_num").val();
+        var verify=$("#verify").val();
+        var ename=$(".ename").val();
+        var ephone=$(".ephone").val();
+        var eaddpro=$("#myAddrs").val();
+        var eaddcity=$(".eaddress").val();
+        var REG_NUM = /^\d{16}$/ ;
+        var CHECK_NUM = /^13[0-9]{1}[0-9]{8}$|15[0-9]{1}[0-9]{8}$|18[0-9]{9}|14[0-9]{1}[0-9]{8}|17[0-9]{1}[0-9]{8}|19[0-9]{1}[0-9]{8}$/;
+        if(project_type=='' ){
+            $('#span_project_type').show();
+            return false;
+        }
+        if(project_num ==''|| !REG_NUM.test(project_num)){
+            $('#span_project_num').show();
+            return false;
+        }
+        //-----pppppp---------------//
+        //已经勾选
+        if(ename==''|| ename == null ){
+            $('#idename').show();
+            return false;
+        }
+        if(ephone==''|| !CHECK_NUM.test(ephone) ){
+            $('#idephone').show();
+            return false;
+        }
+        if(typeof(eaddpro) == "undefined" || eaddpro == '' || eaddpro == null ){
+            $('#dizhi').show();
+            return false;
+        }
+        $.ajax({
+            url:"<?php echo base_url('register_projects/doUserProject?token='.$token);?>",
+            data:{
+                project_type:project_type,
+                project_num:project_num,
+                ename:ename,
+                ephone:ephone,
+                eaddpro:eaddpro,
+                eaddcity:eaddcity,
+                verify:verify
+            },
+            type:'post',
+            cache:false,
+            dataType:'json',
+            success:function(data){
+                closeload();
+                //一般提交成功
+                if( data.result_code == '200' ){
+                    showPopUpDiv();
+                    getAlert({
+                        text:data.info,
+                        alert:1
+                    },"<?php echo base_url('user?redirect_url=success_project&token='.$token);?>")
+                    return false;
+                }
+                //从其他页面进入的提交页
+                if( data.result_code == '300' ){
+                    showPopUpDiv();
+                    getAlert({
+                        text:data.info,  //文本可修改，可加参数
+                        alert:1	     	  //参数可修改 0,1,2
+                    },data.url)
+                    return false;
+                }
+                //提交失败
+                if( data.result_code == '400' ){
+                    showPopUpDiv();
+                    getAlert({
+                        text:data.error_msg,  //文本可修改，可加参数
+                        alert:0	     	  //参数可修改 0,1,2
+                    })
+                    return false;
+                }
+                console.log(data);
+                //产品编号验证失败
+                if( data.result_code == '401' ){
+                    showPopUpDiv();
+                    getAlert({
+                        text:data.error_msg,  //文本可修改，可加参数
+                        alert:0	     	  //参数可修改 0,1,2
+                    })
+                    $(".popUp-body").css({"margin":"10%","margin-bottom":"0px"});
+                    $(".alertDiv .alert-text").css("line-height","19px");
+                    return false;
+                }
+            },
+            error : function() {
+                closeload();
+                showPopUpDiv();
+                getAlert({
+                    text:"请检查网络是否畅通",
+                    alert:0
+                });
+            }
+        });
+    });
+    showload();
+    function span_hidden(){
+        $('.span_hidden').hide();
+    }
+</script>

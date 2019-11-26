@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="<?php echo base_url();?>" />
+    <meta charset="UTF-8">
+    <title>穿越糖潮</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta http-equiv="x-rim-auto-match" content="none" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="text/javascript" src="js/jquery.1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/alert.js"></script>
+    <script type="text/javascript" src="js/loading.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <!-- 引入播放器 css 文件 -->
+    <link href="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.css" rel="stylesheet">
+    <!-- 如需在IE8、9浏览器中初始化播放器，浏览器需支持Flash并在页面中引入 -->
+    <!--[if lt IE 9]>
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/ie8/videojs-ie8.js"></script>
+    <![endif]-->
+    <!-- 如果需要在 Chrome Firefox 等现代浏览器中通过H5播放hls，需要引入 hls.js -->
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/lib/hls.min.0.8.8.js"></script>
+    <!-- 引入播放器 js 文件 -->
+    <script src="//imgcache.qq.com/open/qcloud/video/tcplayer/tcplayer.min.js"></script>
+</head>
+
+<style>
+    .wrapper .uls li a{list-style:none;text-decoration : none;color: black;}
+    .wrapper .js-video{margin:0 auto;width: 100%}
+    .wrapper .uls .mage_box{ list-style:none; width:100%; margin:0px auto;}
+    .wrapper .uls .mage_box li{ width:36px; height:36px; background-color: #fff; border:1px solid #979797;float:left; margin:0 10px 10px 10px;text-align: center;line-height: 36px;}
+    .wrapper .uls .mage_box li{ border-top-left-radius:5px; border-radius: 50%; -moz-border-radius: 50%; -webkit-border-radius: 50%;}
+    .wrapper .js-video{
+        width:100%;
+        position:relative;
+        padding-bottom:56.25%;    /*需要用padding来维持16:9比例,也就是9除以16*/
+        height: 0;
+        background:none;
+    }
+    .wrapper .js-video video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%
+    }
+</style>
+
+<body>
+<div class="wrapper">
+    <div class="js-video">
+        <div class="video1" style="display: none;"><video id="player-container-id" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video2" style="display: none;"><video id="player-container-id2" preload="auto"  playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video3" style="display: none;"><video id="player-container-id3" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video4" style="display: none;"><video id="player-container-id4" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video5" style="display: none;"><video id="player-container-id5" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video6" style="display: none;"><video id="player-container-id6" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video7" style="display: none;"><video id="player-container-id7" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video8" style="display: none;"><video id="player-container-id8" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video9" style="display: none;"><video id="player-container-id9" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video10" style="display: none;"><video id="player-container-id10" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video11" style="display: none;"><video id="player-container-id11" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video12" style="display: none;"><video id="player-container-id12" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video13" style="display: none;"><video id="player-container-id13" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video14" style="display: none;"><video id="player-container-id14" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video15" style="display: none;"><video id="player-container-id15" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video16" style="display: none;"><video id="player-container-id16" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video17" style="display: none;"><video id="player-container-id17" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video18" style="display: none;"><video id="player-container-id18" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video19" style="display: none;"><video id="player-container-id19" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+        <div class="video20" style="display: none;"><video id="player-container-id20" preload="auto" playsinline webkit-playinline x5-playinline></video></div>
+
+    </div>
+    <div class="title" style="width: 96%;margin: 0 auto;margin-top: 2%;">
+        <span style="display:inline-block;width:100%;margin-left: 2%;font-size: 18px;"><b>穿越糖潮第一季</b></span>
+        <span style="display:inline-block;width:100%;margin-top:2%;margin-left: 2%;"><b>主讲人：向红丁</b></span>
+        <p style="display:inline-block;margin-top:2%;margin-left: 2%;color: #979797;">简介：如今这个太平盛世，打造了又一个“糖潮”，但是此糖潮并非彼唐朝......</p>
+    </div>
+
+    <div class="uls" style="width: 100%;float: left;margin-top: 2%;">
+        <ul class="mage_box" style="margin-left: 4%;">
+            <li class="li1"><a class="a1" href="http://quinnovare.cn/product/tcPlayer?v=1">1</a></li>
+            <li class="li2"><a class="a2" href="http://quinnovare.cn/product/tcPlayer?v=2">2</a></li>
+            <li class="li3"><a class="a3" href="http://quinnovare.cn/product/tcPlayer?v=3">3</a></li>
+            <li class="li4"><a class="a4" href="http://quinnovare.cn/product/tcPlayer?v=4">4</a></li>
+            <li class="li5"><a class="a5" href="http://quinnovare.cn/product/tcPlayer?v=5">5</a></li>
+            <li class="li6"><a class="a6" href="http://quinnovare.cn/product/tcPlayer?v=6">6</a></li>
+            <li class="li7"><a class="a7" href="http://quinnovare.cn/product/tcPlayer?v=7">7</a></li>
+            <li class="li8"><a class="a8" href="http://quinnovare.cn/product/tcPlayer?v=8">8</a></li>
+            <li class="li9"><a class="a9" href="http://quinnovare.cn/product/tcPlayer?v=9">9</a></li>
+            <li class="li10"><a class="a10" href="http://quinnovare.cn/product/tcPlayer?v=10">10</a></li>
+            <li class="li11"><a class="a11" href="http://quinnovare.cn/product/tcPlayer?v=11">11</a></li>
+            <li class="li12"><a class="a12" href="http://quinnovare.cn/product/tcPlayer?v=12">12</a></li>
+            <li class="li13"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=13">13</a></li>
+            <li class="li14"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=14">14</a></li>
+            <li class="li15"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=15">15</a></li>
+            <li class="li16"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=16">16</a></li>
+            <li class="li17"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=17">17</a></li>
+            <li class="li18"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=18">18</a></li>
+            <li class="li19"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=19">19</a></li>
+            <li class="li20"><a class="a13" href="http://quinnovare.cn/product/tcPlayer?v=20">20</a></li>
+
+        </ul>
+    </div>
+</div>
+</body>
+<script>
+    if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        //window.location.href="http://quinnovare.cn/product/tcPlayer";
+        var winWidth = document.body.scrollWidth; // 取窗口宽度
+        //var myDiv = document.getElementsByTagName("video"); // 动态创建 div
+        //myDiv.style.width = winWidth; // 设置宽度
+        //$("video").width(winWidth);
+        $("video").attr("width",winWidth);
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+        var vid = getUrlParam('v');
+
+        switch (vid)
+        {
+            case '1':
+                $('.video1').show();
+                $('.li1').css("background-color","#00ADCD");
+                $('.li1').css("border","1px solid #00ADCD");
+                $('.a1').css("color","#fff");
+                var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789552072862", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '2':
+                $('.video2').show();
+                $('.li2').css("background-color","#00ADCD");
+                $('.li2').css("border","1px solid #00ADCD");
+                $('.a2').css("color","#fff");
+                var player = TCPlayer("player-container-id2", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789523355502", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '3':
+                $('.video3').show();
+                $('.li3').css("background-color","#00ADCD");
+                $('.li3').css("border","1px solid #00ADCD");
+                $('.a3').css("color","#fff");
+                var player = TCPlayer("player-container-id3", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789522858792", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '4':
+                $('.video4').show();
+                $('.li4').css("background-color","#00ADCD");
+                $('.li4').css("border","1px solid #00ADCD");
+                $('.a4').css("color","#fff");
+                var player = TCPlayer("player-container-id4", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789551294780", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '5':
+                $('.video5').show();
+                $('.li5').css("background-color","#00ADCD");
+                $('.li5').css("border","1px solid #00ADCD");
+                $('.a5').css("color","#fff");
+                var player = TCPlayer("player-container-id5", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658429785", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '6':
+                $('.video6').show();
+                $('.li6').css("background-color","#00ADCD");
+                $('.li6').css("border","1px solid #00ADCD");
+                $('.a6').css("color","#fff");
+                var player = TCPlayer("player-container-id6", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658723344", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '7':
+                $('.video7').show();
+                $('.li7').css("background-color","#00ADCD");
+                $('.li7').css("border","1px solid #00ADCD");
+                $('.a7').css("color","#fff");
+                var player = TCPlayer("player-container-id7", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789180318967", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '8':
+                $('.video8').show();
+                $('.li8').css("background-color","#00ADCD");
+                $('.li8').css("border","1px solid #00ADCD");
+                $('.a8').css("color","#fff");
+                var player = TCPlayer("player-container-id8", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658705695", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '9':
+                $('.video9').show();
+                $('.li9').css("background-color","#00ADCD");
+                $('.li9').css("border","1px solid #00ADCD");
+                $('.a9').css("color","#fff");
+                var player = TCPlayer("player-container-id9", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789179148415", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '10':
+                $('.video10').show();
+                $('.li10').css("background-color","#00ADCD");
+                $('.li10').css("border","1px solid #00ADCD");
+                $('.a10').css("color","#fff");
+                var player = TCPlayer("player-container-id10", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789657730733", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '11':
+                $('.video11').show();
+                $('.li11').css("background-color","#00ADCD");
+                $('.li11').css("border","1px solid #00ADCD");
+                $('.a11').css("color","#fff");
+                var player = TCPlayer("player-container-id11", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789657759750", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '12':
+                $('.video12').show();
+                $('.li12').css("background-color","#00ADCD");
+                $('.li12').css("border","1px solid #00ADCD");
+                $('.a12').css("color","#fff");
+                var player = TCPlayer("player-container-id12", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658508522", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '13':
+                $('.video13').show();
+                $('.li13').css("background-color","#00ADCD");
+                $('.li13').css("border","1px solid #00ADCD");
+                $('.a13').css("color","#fff");
+                var player = TCPlayer("player-container-id13", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789657762240", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '14':
+                $('.video14').show();
+                $('.li14').css("background-color","#00ADCD");
+                $('.li14').css("border","1px solid #00ADCD");
+                $('.a14').css("color","#fff");
+                var player = TCPlayer("player-container-id14", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658739926", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '15':
+                $('.video15').show();
+                $('.li15').css("background-color","#00ADCD");
+                $('.li15').css("border","1px solid #00ADCD");
+                $('.a15').css("color","#fff");
+                var player = TCPlayer("player-container-id15", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789179148442", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '16':
+                $('.video16').show();
+                $('.li16').css("background-color","#00ADCD");
+                $('.li16').css("border","1px solid #00ADCD");
+                $('.a16').css("color","#fff");
+                var player = TCPlayer("player-container-id16", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658774119", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '17':
+                $('.video17').show();
+                $('.li17').css("background-color","#00ADCD");
+                $('.li17').css("border","1px solid #00ADCD");
+                $('.a17').css("color","#fff");
+                var player = TCPlayer("player-container-id17", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658775214", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '18':
+                $('.video18').show();
+                $('.li18').css("background-color","#00ADCD");
+                $('.li18').css("border","1px solid #00ADCD");
+                $('.a18').css("color","#fff");
+                var player = TCPlayer("player-container-id18", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789658560327", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '19':
+                $('.video19').show();
+                $('.li19').css("background-color","#00ADCD");
+                $('.li19').css("border","1px solid #00ADCD");
+                $('.a19').css("color","#fff");
+                var player = TCPlayer("player-container-id19", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789179148468", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            case '20':
+                $('.video20').show();
+                $('.li20').css("background-color","#00ADCD");
+                $('.li20').css("border","1px solid #00ADCD");
+                $('.a20').css("color","#fff");
+                var player = TCPlayer("player-container-id20", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789657842310", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+            default:
+                $('.video1').show();
+                $('.li1').css("background-color","#00ADCD");
+                $('.li1').css("border","1px solid #00ADCD");
+                $('.a1').css("color","#fff");
+                var player = TCPlayer("player-container-id", { // player-container-id 为播放器容器ID，必须与html中一致
+                    fileID: "5285890789552072862", // 请传入需要播放的视频filID 必须
+                    appID: "1259273533", // 请传入点播账号的appID 必须
+                    autoplay: false //是否自动播放
+                });
+                break;
+        }
+    }else{
+        window.location.href="http://quinnovare.cn/product/tcPlayer_tx";
+    }
+</script>
+</html>

@@ -1,0 +1,3 @@
+002|<?xml version='1.0' encoding='utf-8' ?><messageinfo><item accode='8694908170248683'><reply>您查询的号码已在2019年03月12日13时55分被查询过,该号码已经失效,谨防假冒. 并请拨打咨询热线021-26095599。</reply><cuanhuocode>865701352415</cuanhuocode><productcode>02</productcode><zcode>AA009997</zcode></item></messageinfo>
+001|<?xml version='1.0' encoding='utf-8' ?><messageinfo><item accode='5983849986194881'><reply>感谢您购买北京快舒尔医疗技术有限公司的正宗产品</reply><cuanhuocode>865701122813</cuanhuocode><productcode>02</productcode><zcode>PJ08042016</zcode></item></messageinfo>
+003|<?xml version='1.0' encoding='utf-8' ?><messageinfo><item accode='8694908170248622'><reply>您所查询的数码不存在，谨防假冒，或核对后重新输入，并请拨打咨询热线021-26095599。谢谢您的使用！</reply><cuanhuocode></cuanhuocode><productcode></productcode><zcode></zcode></item></messageinfo>

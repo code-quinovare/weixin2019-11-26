@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言管理</title>
+    <base href="<?php echo base_url()?>">
+    <link href="css/admin/bootstrap.css" rel="stylesheet">
+    <link href="css/admin/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="css/admin/login.css" rel="stylesheet">
+    <style type="text/css">
+        .tr1 th{
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="text-align: center;">
+<div style="margin: 0 auto;margin-top: 2%;">
+    <div>
+        <span style="font-size: 16px;"><b>用户留言</b></span>
+    </div>
+    <div style="margin-top: 1%;">
+        <table border="1" align="center">
+            <thead>
+            <tr class="tr1">
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>留言内容</th>
+                <th>地区</th>
+                <th>时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+             if(count($data)>0){
+            foreach($data as $value){
+            echo "<tr>";
+                echo "<td>";echo $value['name'];echo "</td>";
+                echo "<td>";echo $value['email'];echo "</td>";
+                echo "<td>";echo $value['content'];echo "</td>";
+                echo "<td>";echo $value['address'];echo "</td>";
+                echo "<td>";echo $value['addtime'];echo "</td>";
+                echo "</tr>";
+            }
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+    <div style="margin-top: 1%">
+        <form action="/wechat_crm/loginout" method="get">
+            <input type="submit" value="退出">
+        </form>
+    </div>
+</div>
+</body>
+</html>
